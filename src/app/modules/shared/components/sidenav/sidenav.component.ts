@@ -1,0 +1,27 @@
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrl: './sidenav.component.css'
+})
+export class SidenavComponent implements OnInit {
+
+  mobile: MediaQueryList;
+
+  menuNav = [
+    { name: "Home", route: "home", icon: "home" },
+    { name: "Categorías", route: "home", icon: "category" },
+    { name: "Productos", route: "home", icon: "production_quantity_limits" }
+  ];
+
+  constructor(media: MediaMatcher) {
+    this.mobile = media.matchMedia('(max-width: 600px)');
+  }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+}

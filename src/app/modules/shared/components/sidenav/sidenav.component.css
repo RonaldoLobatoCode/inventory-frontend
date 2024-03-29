@@ -1,0 +1,77 @@
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+.is-mobile .dashboard-toolbar{
+    position: fixed;
+    z-index: 2;
+}
+
+.app-name{
+    margin-left: 10px;
+}
+
+.icons-right{
+    margin-left: auto;
+}
+
+.icons-right ul{
+    display: flex;
+    align-items: center;
+}
+
+.icons-right ul li{
+    list-style-type: none;
+}
+
+.sidenav-container{
+    flex: 1;
+}
+
+.is-mobile .sidenav-container{
+    flex: 1 0 auto;
+}
+
+.profile-card{
+    text-align: center;
+    padding: 0 20px 20px 20px;
+}
+
+.header{
+    margin-top: 20px;
+}
+
+.header h3{
+    font-weight: 600;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item-content {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item-content mat-icon {
+    margin-right: 16px; 
+}
+
+.menu-content {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px; /* Padding superior e inferior de 8px y padding izquierdo y derecho de 16px */
+}
+
+.menu-content mat-icon {
+    margin-right: 8px; /* Espacio entre el ícono y el texto */
+}
