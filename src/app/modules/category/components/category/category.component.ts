@@ -102,7 +102,7 @@ export class CategoryComponent implements OnInit {
 
   delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: { id: id},
+      data: { id: id },
       width: '450px'
     });
 
@@ -116,6 +116,21 @@ export class CategoryComponent implements OnInit {
       }
     });
   }
+
+  /* 
+  * Metodo para buscar por id
+  */
+  buscar(termino: string) {
+    if (termino.length === 0) {
+      return this.getCategories();
+    }
+
+    this.categoryService.getCategoryById(termino).subscribe((response: any) => {
+      this.processCategoriesResponse(response);
+    })
+  }
+
+
   /*
   *Mensaje de SnackBar
   */
