@@ -80,6 +80,26 @@ export class CategoryComponent implements OnInit {
   }
 
   /*
+  * Metodo para enviar la informacion al dialog category 
+  */
+  edit(id: number, name: string, description: string) {
+    const dialogRef = this.dialog.open(DialogCategoryComponent, {
+      data: {id: id, name: name, description: description},
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar("Categoría actualizada", "Exito");
+        this.getCategories();
+      }
+      else if (result == 2) {
+        this.openSnackBar("Error inesperado, no se pudo actualizar la categoría", "Error");
+      }
+    });
+  }
+
+  /*
   *Mensaje de SnackBar
   */
   openSnackBar(message: string, action: string) {
