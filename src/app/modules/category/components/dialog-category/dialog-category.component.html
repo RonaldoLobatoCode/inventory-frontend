@@ -1,0 +1,23 @@
+<mat-dialog-content>
+    <h2>Agregar nueva Categoría</h2>
+    <hr>
+    <form [formGroup]="categoryForm">
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName="name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea name="" id="" cols="10" rows="3" class="form-control" formControlName="description"></textarea>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSave()" [disabled]="categoryForm.invalid">
+        <mat-icon>save</mat-icon>Guardar
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>Cancelar
+    </button>
+</mat-dialog-actions>
