@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCategoryComponent } from '../dialog-category/dialog-category.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 
 export interface CategoryElement {
   id: number;
@@ -84,7 +85,7 @@ export class CategoryComponent implements OnInit {
   */
   edit(id: number, name: string, description: string) {
     const dialogRef = this.dialog.open(DialogCategoryComponent, {
-      data: {id: id, name: name, description: description},
+      data: { id: id, name: name, description: description },
       width: '450px'
     });
 
@@ -99,6 +100,22 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  delete(id: any) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: { id: id},
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar("Categoría eliminada", "Exito");
+        this.getCategories();
+      }
+      else if (result == 2) {
+        this.openSnackBar("Error inesperado, no se pudo eliminar la categoría", "Error");
+      }
+    });
+  }
   /*
   *Mensaje de SnackBar
   */
