@@ -12,8 +12,9 @@ export class ConfirmComponent implements OnInit {
 
   private dialogRef = inject(MatDialogRef);
   public data = inject(MAT_DIALOG_DATA);
+  public http = inject(CategoryService);
 
-  constructor(private htpp: CategoryService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -21,7 +22,7 @@ export class ConfirmComponent implements OnInit {
 
   delete() {
     if (this.data != null) {
-      this.htpp.deleteCategory(this.data.id).subscribe((data: any) => {
+      this.http.deleteCategory(this.data.id).subscribe((data: any) => {
         this.dialogRef.close(1);
       }, (error: any) => {
         this.dialogRef.close(2);
