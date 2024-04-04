@@ -1,0 +1,27 @@
+.first-title{
+    text-align: center;
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+.left{
+    margin-left: auto;
+}
+
+.left button{
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.table-datasource{
+    margin-top: 20px;
+}
+
+mat-form-field{
+    width: 135%;
+}
+
+mat-paginator{
+    margin-top: 16px;
+}
