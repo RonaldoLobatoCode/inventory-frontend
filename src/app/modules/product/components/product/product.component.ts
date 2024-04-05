@@ -121,6 +121,14 @@ export class ProductComponent implements OnInit {
     });
   }
   
+  buscar(name: any) {
+    if(name.length === 0) {
+      return this.getProductos();
+    }
+    this.serviceProduct.getProductByName(name).subscribe((data: any) => {
+      this.processProductResponse(data);
+    })
+  }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
