@@ -71,20 +71,26 @@ export class DialogProductComponent implements OnInit {
     uploadImageData.append('stock', data.stock);
     uploadImageData.append('category', data.category);
 
-    if (data != null) {
-      //update product call the service to update a product
-      this.productService.updateProduct(uploadImageData, this.data.id).subscribe((data: any) => {
-        this.dialogRef.close(1);
-      }, (error: any) => {
-        this.dialogRef.close(2);
-      })
+    if (this.data != null) {
+      // Hay datos existentes, por lo tanto, actualiza el producto
+      this.productService.updateProduct(uploadImageData, this.data.id).subscribe(
+        (data: any) => {
+          this.dialogRef.close(1); 
+        },
+        (error: any) => {
+          this.dialogRef.close(2); 
+        }
+      );
     } else {
-      //Save te product call the service to save a product
-      this.productService.saveProduct(uploadImageData).subscribe((data: any) => {
-        this.dialogRef.close(1);
-      }, (error) => {
-        this.dialogRef.close(2);
-      })
+      // No hay datos existentes, por lo tanto, guarda un nuevo producto
+      this.productService.saveProduct(uploadImageData).subscribe(
+        (data: any) => {
+          this.dialogRef.close(1); 
+        },
+        (error: any) => {
+          this.dialogRef.close(2); 
+        }
+      );
     }
 
   }

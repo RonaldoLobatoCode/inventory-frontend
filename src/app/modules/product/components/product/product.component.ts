@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DialogProductComponent } from '../dialog-product/dialog-product.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 
 export interface ProductElements {
   id: number;
@@ -98,6 +99,28 @@ export class ProductComponent implements OnInit {
       }
     });
   }
+
+  delete(id: any) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: { id: id, module: "product" },
+      width: '450px'
+    });
+  
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.serviceProduct.deleteProduct(id).subscribe(
+          (data: any) => {
+            this.openSnackBar("Producto eliminado", "Éxito");
+            this.getProductos(); // Actualizar la lista de productos después de la eliminación exitosa
+          },
+          (error: any) => {
+            this.openSnackBar("Error inesperado, no se pudo eliminar el producto", "Error");
+          }
+        );
+      }
+    });
+  }
+  
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {

@@ -107,21 +107,25 @@ export class CategoryComponent implements OnInit {
 
   delete(id: any) {
     const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: { id: id },
+      data: { id: id, module: "category" },
       width: '450px'
     });
-
+  
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 1) {
-        this.openSnackBar("Categoría eliminada", "Exito");
-        this.getCategories();
-      }
-      else if (result == 2) {
-        this.openSnackBar("Error inesperado, no se pudo eliminar la categoría", "Error");
+        this.categoryService.deleteCategory(id).subscribe(
+          (data: any) => {
+            this.openSnackBar("Categoría eliminada", "Éxito");
+            this.getCategories(); // Actualizar la lista de categorías después de la eliminación exitosa
+          },
+          (error: any) => {
+            this.openSnackBar("Error inesperado, no se pudo eliminar la categoría", "Error");
+          }
+        );
       }
     });
   }
-
+  
   /* 
   * Metodo para buscar por id
   */
