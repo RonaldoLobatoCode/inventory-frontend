@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogProductComponent } from '../dialog-product/dialog-product.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface ProductElements {
   id: number;
@@ -20,7 +23,10 @@ export interface ProductElements {
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private serviceProduct: ProductService) { }
+
+  public dialog = inject(MatDialog);
+
+  constructor(private serviceProduct: ProductService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getProductos();
@@ -46,18 +52,39 @@ export class ProductComponent implements OnInit {
   //Process data
   processProductResponse(response: any) {
     const dateProduct: ProductElements[] = [];
-    if(response.metadata[0].code == "00") {
+    if (response.metadata[0].code == "00") {
       let listProduct = response.product.products;
 
-      listProduct.forEach((element : ProductElements) => {
+      listProduct.forEach((element: ProductElements) => {
         element.category = element.category.name;
-        element.picture = 'data:image/jpeg;base64,'+element.picture;
+        element.picture = 'data:image/jpeg;base64,' + element.picture;
         dateProduct.push(element);
       });
 
       //Set the datasource
       this.dataSource = new MatTableDataSource<ProductElements>(dateProduct);
-      this.paginator = this.paginator;
+      this.dataSource.paginator = this.paginator;
     }
+  }
+
+  openDialogProduct(): void {
+    const dialogRef = this.dialog.open(DialogProductComponent, {
+      width: '750px'
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar("Producto Guardado", "Exitoso");
+        this.getProductos();
+      } else if (result == 2) {
+        this.openSnackBar("Error inesperado, no se pudo guardar el producto", "Error");
+      }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000
+    });
   }
 }

@@ -1,0 +1,48 @@
+<mat-dialog-content>
+    <h2>{{statusTitle}} nuevo Producto</h2>
+    <hr>
+    <form [formGroup]="productFrom">
+        <div class="mb-3 row">
+            <div class="col-12">
+                <label class="form-label">Producto</label>
+                <input type="text" class="form-control" formControlName="name" required>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-6">
+                <label class="form-label">Precio</label>
+                <input type="number" class="form-control" formControlName="price" required>
+            </div>
+            <div class="col-6">
+                <label class="form-label">Cantidad</label>
+                <input type="number" class="form-control" formControlName="stock" required>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-12">
+                <label class="form-label">Categoria</label>
+                <select class="form-select" formControlName="category" required>
+                    <option *ngFor="let category of categories" [value]="category.id">
+                        {{category.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col-12">
+                <label for="file-upload" class="form-label">Seleccionar foto</label>
+                <input type="file" class="form-control" id="file-upload" accept="image/png, image/jpeg, image/jpg" 
+                    (change)="onFileChanged($event)" formControlName="picture" required>
+                <!-- <span>{{nameImg}}</span>-->
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="onSave()" [disabled]="productFrom.invalid">
+        <mat-icon>save</mat-icon>Guardar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button color="primary" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>Cancelar</button>
+</mat-dialog-actions>
