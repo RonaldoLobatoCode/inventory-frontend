@@ -56,7 +56,7 @@ export class ProductComponent implements OnInit {
       let listProduct = response.product.products;
 
       listProduct.forEach((element: ProductElements) => {
-        element.category = element.category.name;
+        //element.category = element.category.name;
         element.picture = 'data:image/jpeg;base64,' + element.picture;
         dateProduct.push(element);
       });
@@ -78,6 +78,23 @@ export class ProductComponent implements OnInit {
         this.getProductos();
       } else if (result == 2) {
         this.openSnackBar("Error inesperado, no se pudo guardar el producto", "Error");
+      }
+    });
+  }
+
+
+  edit(id: number, name: string, price: number, stock: number, category: any) {
+    const dialogRef = this.dialog.open(DialogProductComponent, {
+      width: '750px',
+      data: { id: id, name: name, price: price, stock: stock, category: category },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result == 1) {
+        this.openSnackBar("Producto actualizado", "Exitoso");
+        this.getProductos();
+      } else if (result == 2) {
+        this.openSnackBar("Error inesperado, no se pudo actualizar el producto", "Error");
       }
     });
   }

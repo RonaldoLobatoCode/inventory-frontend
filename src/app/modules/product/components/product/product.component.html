@@ -52,7 +52,7 @@
             <!-- Description Column -->
             <ng-container matColumnDef="category">
                 <th mat-header-cell *matHeaderCellDef>Categoria</th>
-                <td mat-cell *matCellDef="let element">{{element.category}}</td>
+                <td mat-cell *matCellDef="let element">{{element.category.name}}</td>
             </ng-container>q
 
             <!-- Description Column -->
@@ -65,7 +65,7 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef>Acciones</th>
                 <td mat-cell *matCellDef="let element; let i=index;">
-                    <button mat-icon-button color="accent">
+                    <button mat-icon-button color="accent" (click)="edit(element.id, element.name, element.price, element.stock, element.category)">
                         <mat-icon aria-label="Edit">edit</mat-icon>
                     </button>
                     <button mat-icon-button color="accent">

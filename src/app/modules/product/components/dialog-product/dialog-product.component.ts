@@ -44,12 +44,17 @@ export class DialogProductComponent implements OnInit {
     });
 
     if (this.data != null) {
+      this.updateForm(this.data);
       this.statusTitle = "Actualizar";
     }
 
     this.getCategories();
   }
 
+  /**
+   * Si la variable es null, registra los datos.
+   * si la variable no es null, actualiza los datos existentes.
+   */
   onSave() {
     let data = {
       name: this.productFrom.get('name')?.value,
@@ -66,13 +71,22 @@ export class DialogProductComponent implements OnInit {
     uploadImageData.append('stock', data.stock);
     uploadImageData.append('category', data.category);
 
-    //Call the service to save a product
-    this.productService.saveProduct(uploadImageData).subscribe((data: any) => {
-      this.dialogRef.close(1);
-    }, (error) => {
-      this.dialogRef.close(2);
-      console.log("Error al registrar", data)
-    })
+    if (data != null) {
+      //update product call the service to update a product
+      this.productService.updateProduct(uploadImageData, this.data.id).subscribe((data: any) => {
+        this.dialogRef.close(1);
+      }, (error: any) => {
+        this.dialogRef.close(2);
+      })
+    } else {
+      //Save te product call the service to save a product
+      this.productService.saveProduct(uploadImageData).subscribe((data: any) => {
+        this.dialogRef.close(1);
+      }, (error) => {
+        this.dialogRef.close(2);
+      })
+    }
+
   }
 
 
@@ -92,6 +106,20 @@ export class DialogProductComponent implements OnInit {
     console.log(this.selectedFile);
 
     this.nameImg = event.target.files[0].name;
+  }
+
+  /**
+   * Get data in the form dialog product
+   * @param data 
+   */
+  updateForm(data: any) {
+    this.productFrom = this.fb.group({
+      name: [data.name, Validators.required],
+      price: [data.price, Validators.required],
+      stock: [data.stock, Validators.required],
+      category: [data.category.id, Validators.required],
+      picture: ['', Validators.required],
+    });
   }
 
   onCancel() {
