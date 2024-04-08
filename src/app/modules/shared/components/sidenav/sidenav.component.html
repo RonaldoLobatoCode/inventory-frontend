@@ -17,10 +17,10 @@
                         <mat-icon>person</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <div class="menu-content">
+                        <button mat-menu-item class="menu-content" (click)="logout()">
                             <mat-icon>exit_to_app</mat-icon>
                             Cerrar Sesión
-                        </div>
+                        </button>
                     </mat-menu>
                 </li>
             </ul>
@@ -35,7 +35,7 @@
                 <!--Profile-->
                 <div class="profile-card">
                     <div class="header">
-                        <h3>Ronaldo Lobato</h3>
+                        <h3>{{userName}}</h3>
                         <h4>contactoronaldolobato</h4>
                     </div>
                 </div>
