@@ -7,6 +7,7 @@ import { DialogProductComponent } from '../dialog-product/dialog-product.compone
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
+import { UtilService } from '../../../shared/services/util.service';
 
 export interface ProductElements {
   id: number;
@@ -27,11 +28,15 @@ export class ProductComponent implements OnInit {
 
   public dialog = inject(MatDialog);
 
-  constructor(private serviceProduct: ProductService, private _snackBar: MatSnackBar) { }
+  isAdmin: any;
+
+  constructor(private serviceProduct: ProductService, private _snackBar: MatSnackBar, private util : UtilService) { }
 
   ngOnInit(): void {
     this.getProductos();
+    this.isAdmin = this.util.isAdmin();
   }
+  
   //Paginator
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

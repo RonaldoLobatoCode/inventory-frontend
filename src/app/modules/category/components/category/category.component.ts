@@ -6,6 +6,7 @@ import { DialogCategoryComponent } from '../dialog-category/dialog-category.comp
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { UtilService } from '../../../shared/services/util.service';
 
 export interface CategoryElement {
   id: number;
@@ -25,14 +26,17 @@ export class CategoryComponent implements OnInit {
 
   public dialog = inject(MatDialog);
 
+  isAdmin: any;
+
   //Paginator
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private util: UtilService) { }
 
   ngOnInit(): void {
     this.getCategories();
+    this.isAdmin = this.util.isAdmin();
   }
 
   //Seteamos las columnas a la tabla
