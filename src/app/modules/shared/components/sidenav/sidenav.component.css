@@ -75,3 +75,12 @@
 .menu-content mat-icon {
     margin-right: 8px; /* Espacio entre el ícono y el texto */
 }
+
+#user {
+    text-transform: uppercase;
+}
+
+.header .sub-title-h3 {
+    font-size: 18px;
+    font-weight: 500;
+}

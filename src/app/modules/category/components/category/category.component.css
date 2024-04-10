@@ -1,27 +1,32 @@
-.first-title{
+.first-title {
     text-align: center;
     font-size: 26px;
     margin-top: 10px;
 }
 
-.left{
+.left {
     margin-left: auto;
 }
 
-.left button{
+.left button {
     border-radius: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
+    margin: 0 8px;
 }
 
-.table-datasource{
+.table-datasource {
     margin-top: 20px;
 }
 
-mat-form-field{
+mat-form-field {
     width: 135%;
 }
 
-mat-paginator{
+mat-paginator {
     margin-top: 16px;
+}
+
+.custom-icon {
+    color: green;
 }

@@ -114,7 +114,7 @@ export class CategoryComponent implements OnInit {
       data: { id: id, module: "category" },
       width: '450px'
     });
-  
+
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result == 1) {
         this.categoryService.deleteCategory(id).subscribe(
@@ -129,7 +129,7 @@ export class CategoryComponent implements OnInit {
       }
     });
   }
-  
+
   /* 
   * Metodo para buscar por id
   */
@@ -143,6 +143,23 @@ export class CategoryComponent implements OnInit {
     })
   }
 
+  /**
+   * Metodo para exportar archivo excel
+   */
+  exportExcel() {
+    this.categoryService.exportCategories().subscribe((data: any) => {
+      let file = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+      let fileUrl = URL.createObjectURL(file);
+      var anchor = document.createElement("a");
+      anchor.download = "categories.xlsx";
+      anchor.href = fileUrl;
+      anchor.click();
+
+      this.openSnackBar("Archivo exportado exitosamente", "Exito");
+    }, (error: any) => {
+      this.openSnackBar("No se pudo exportar el archivo", "Error");
+    })
+  }
 
   /*
   *Mensaje de SnackBar

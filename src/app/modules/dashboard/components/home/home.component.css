@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+#grafico {
+    margin-top: 22px;
+}
+
+#grafico h1 {
+    font-family: "Barlow", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+    font-size: 32px;
+}
+
+#circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    width: 800px;
+    height: 600px;
+}
+
+#canvas-doughnut {
+    width: 80%;
+    height: 80%;
+}
+
+
+#bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+    margin: 0 20px 0 16px;
+}
+
+#canvas-bar {
+    width: 100%; /* El canvas ocupa todo el ancho disponible en su contenedor */
+    height: auto; /* La altura se ajusta automáticamente para mantener la relación de aspecto */
+    max-height: 380px; /* Altura máxima del canvas en pantallas anchas */
+}
+
+/* Media query para pantallas con ancho mínimo de 950px */
+@media only screen and (min-width: 950px) {
+    #canvas-bar {
+        max-height: 380px; /* Altura máxima del canvas en pantallas anchas */
+    }
+}
